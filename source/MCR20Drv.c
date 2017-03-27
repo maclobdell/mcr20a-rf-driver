@@ -587,6 +587,34 @@ void
 }
 
 /*---------------------------------------------------------------------------
+* Name: MCR20Drv_CLK_SEL_Assert
+* Description: -
+* Parameters: -
+* Return: -
+*---------------------------------------------------------------------------*/
+void MCR20Drv_CLK_SEL_Assert
+(
+void
+)
+{
+    RF_CLK_SEL_Set(0);
+}
+
+/*---------------------------------------------------------------------------
+* Name: MCR20Drv_RST_Deassert
+* Description: -
+* Parameters: -
+* Return: -
+*---------------------------------------------------------------------------*/
+void MCR20Drv_CLK_SEL_Deassert
+(
+void
+)
+{
+    RF_CLK_SEL_Set(1);
+}
+
+/*---------------------------------------------------------------------------
 * Name: MCR20Drv_SoftRST_Assert
 * Description: -
 * Parameters: -
@@ -644,6 +672,7 @@ void
 )
 {
     volatile uint32_t delay = 1000;
+    MCR20Drv_CLK_SEL_Assert();
     //assert RST_B
     MCR20Drv_RST_B_Assert();
 

@@ -124,6 +124,7 @@ static DigitalOut *cs = NULL;
 static DigitalOut *rst = NULL;
 static InterruptIn *irq = NULL;
 static DigitalIn *irq_pin = NULL;
+static DigitalOut *clk_sel_pin = NULL;
 
 /* Channel info */                 /* 2405    2410    2415    2420    2425    2430    2435    2440    2445    2450    2455    2460    2465    2470    2475    2480 */
 static const uint8_t  pll_int[16] =  {0x0B,   0x0B,   0x0B,   0x0B,   0x0B,   0x0B,   0x0C,   0x0C,   0x0C,   0x0C,   0x0C,   0x0C,   0x0D,   0x0D,   0x0D,   0x0D};
@@ -1619,6 +1620,10 @@ extern "C" void RF_RST_Set(int state) {
     MBED_ASSERT(rst != NULL);
     *rst = state;
 }
+extern "C" void RF_CLK_SEL_Set(int state) {
+    MBED_ASSERT(clk_sel_pin != NULL);
+    *clk_sel_pin = state;
+}
 
 extern "C" void gXcvrAssertCS_d(void)
 {
@@ -1689,10 +1694,14 @@ static void rf_if_unlock(void)
     platform_exit_critical();
 }
 
+//NanostackRfPhyMcr20a::NanostackRfPhyMcr20a(PinName spi_mosi, PinName spi_miso,
+//        PinName spi_sclk, PinName spi_cs,  PinName spi_rst, PinName spi_irq)
+//    : _spi(spi_mosi, spi_miso, spi_sclk), _rf_cs(spi_cs), _rf_rst(spi_rst),
+//      _rf_irq(spi_irq), _rf_irq_pin(spi_irq)
 NanostackRfPhyMcr20a::NanostackRfPhyMcr20a(PinName spi_mosi, PinName spi_miso,
-        PinName spi_sclk, PinName spi_cs,  PinName spi_rst, PinName spi_irq)
+        PinName spi_sclk, PinName spi_cs,  PinName spi_rst, PinName spi_irq, PinName clk_sel)
     : _spi(spi_mosi, spi_miso, spi_sclk), _rf_cs(spi_cs), _rf_rst(spi_rst),
-      _rf_irq(spi_irq), _rf_irq_pin(spi_irq)
+      _rf_irq(spi_irq), _rf_irq_pin(spi_irq), _rf_clk_sel(clk_sel)      
 {
     // Do nothing
 }
@@ -1770,6 +1779,7 @@ void NanostackRfPhyMcr20a::_pins_set()
     rst = &_rf_rst;
     irq = &_rf_irq;
     irq_pin = &_rf_irq_pin;
+    clk_sel_pin = &_rf_clk_sel;
 }
 
 void NanostackRfPhyMcr20a::_pins_clear()
@@ -1779,4 +1789,5 @@ void NanostackRfPhyMcr20a::_pins_clear()
     rst = NULL;
     irq = NULL;
     irq_pin = NULL;
+    clk_sel_pin = NULL;
 }

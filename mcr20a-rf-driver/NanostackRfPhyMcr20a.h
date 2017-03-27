@@ -39,12 +39,19 @@
 #if !defined(MCR20A_SPI_IRQ)
 #define MCR20A_SPI_IRQ    D2
 #endif
+#if !defined(MCR20A_CLK_SEL)
+#define MCR20A_CLK_SEL    NC
+#endif
 
 class NanostackRfPhyMcr20a : public NanostackRfPhy {
 public:
+//    NanostackRfPhyMcr20a(PinName spi_mosi, PinName spi_miso,
+//                         PinName spi_sclk, PinName spi_cs,  PinName spi_rst,
+//                         PinName spi_irq);
     NanostackRfPhyMcr20a(PinName spi_mosi, PinName spi_miso,
                          PinName spi_sclk, PinName spi_cs,  PinName spi_rst,
-                         PinName spi_irq);
+                         PinName spi_irq, PinName clk_sel);
+
     ~NanostackRfPhyMcr20a();
     int8_t rf_register();
     void rf_unregister();
@@ -57,6 +64,7 @@ private:
     DigitalOut _rf_rst;
     InterruptIn _rf_irq;
     DigitalIn _rf_irq_pin;
+    DigitalOut _rf_clk_sel;
 
     void _pins_set();
     void _pins_clear();

@@ -66,6 +66,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 void RF_RST_Set(int state);
+void RF_CLK_SEL_Set(int state);
 void RF_CS_Set(int state);
 void RF_IRQ_Init(void);
 void RF_IRQ_Disable(void);
