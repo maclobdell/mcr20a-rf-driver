@@ -1621,8 +1621,11 @@ extern "C" void RF_RST_Set(int state) {
     *rst = state;
 }
 extern "C" void RF_CLK_SEL_Set(int state) {
-    MBED_ASSERT(clk_sel_pin != NULL);
-    *clk_sel_pin = state;
+    //MBED_ASSERT(clk_sel_pin != NULL);
+    if(clk_sel_pin != NULL)
+    {
+      *clk_sel_pin = state;
+    }  
 }
 
 extern "C" void gXcvrAssertCS_d(void)
