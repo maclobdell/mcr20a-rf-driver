@@ -111,6 +111,7 @@ void
     xcvr_spi_configure_speed(gXcvrSpiInstance_c, 8000000);
 
     gXcvrDeassertCS_d();
+    MCR20Drv_CLK_SEL_Deassert();  //select 0 for 4MHz 
     MCR20Drv_RST_B_Deassert();
     RF_IRQ_Init();
     RF_IRQ_Disable();
@@ -672,7 +673,7 @@ void
 )
 {
     volatile uint32_t delay = 1000;
-    MCR20Drv_CLK_SEL_Assert();
+    MCR20Drv_CLK_SEL_Deassert();  //select 0 for 4MHz 
     //assert RST_B
     MCR20Drv_RST_B_Assert();
 
