@@ -311,6 +311,28 @@ void MCR20Drv_RST_B_Deassert
 );
 
 /*---------------------------------------------------------------------------
+* Name: MCR20Drv_CLK_SEL_Assert
+* Description: -
+* Parameters: -
+* Return: -
+*---------------------------------------------------------------------------*/
+void MCR20Drv_CLK_SEL_Assert
+(
+void
+);
+
+/*---------------------------------------------------------------------------
+* Name: MCR20Drv_RST_Deassert
+* Description: -
+* Parameters: -
+* Return: -
+*---------------------------------------------------------------------------*/
+void MCR20Drv_CLK_SEL_Deassert
+(
+void
+);
+
+/*---------------------------------------------------------------------------
  * Name: MCR20Drv_SoftRST_Assert
  * Description: -
  * Parameters: -
