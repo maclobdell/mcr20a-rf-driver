@@ -51,11 +51,20 @@
  *---------------------------------------------------------------------------*
  *****************************************************************************/
 
+#if defined(TARGET_KW24D)
+
+/* Enable XCVR clock output by default, required for clocking kw24d */
+#ifndef gMCR20_ClkOutFreq_d 
+#define gMCR20_ClkOutFreq_d gCLK_OUT_FREQ_4_MHz
+#endif
+
+#else if
 /* Disable XCVR clock output by default, to reduce power consumption */
 #ifndef gMCR20_ClkOutFreq_d 
 #define gMCR20_ClkOutFreq_d gCLK_OUT_FREQ_DISABLE
 #endif
 
+#endif
 /*****************************************************************************
  *                            PUBLIC FUNCTIONS                               *
  *---------------------------------------------------------------------------*
