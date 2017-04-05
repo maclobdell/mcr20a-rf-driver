@@ -488,7 +488,9 @@ static void rf_init(void)
     mPhySeqState = gIdle_c;
     mPwrState = gXcvrPwrIdle_c;
     /*Reset RF module*/
-    MCR20Drv_RESET();
+    #if !defined(TARGET_KW24D)
+      MCR20Drv_RESET();
+    #endif
     /* Initialize the transceiver SPI driver */
     MCR20Drv_Init();
     /* Disable Tristate on MISO for SPI reads */
@@ -1703,8 +1705,8 @@ static void rf_if_unlock(void)
 //      _rf_irq(spi_irq), _rf_irq_pin(spi_irq)
 NanostackRfPhyMcr20a::NanostackRfPhyMcr20a(PinName spi_mosi, PinName spi_miso,
         PinName spi_sclk, PinName spi_cs,  PinName spi_rst, PinName spi_irq, PinName clk_sel)
-    : _spi(spi_mosi, spi_miso, spi_sclk), _rf_cs(spi_cs), _rf_rst(spi_rst),
-      _rf_irq(spi_irq), _rf_irq_pin(spi_irq), _rf_clk_sel(clk_sel)      
+    : _spi(spi_mosi, spi_miso, spi_sclk), _rf_cs(spi_cs), _rf_rst(spi_rst,1),
+      _rf_irq(spi_irq), _rf_irq_pin(spi_irq), _rf_clk_sel(clk_sel,0)      
 {
     // Do nothing
 }
