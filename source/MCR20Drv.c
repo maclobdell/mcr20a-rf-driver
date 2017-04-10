@@ -112,7 +112,7 @@ void
 
     gXcvrDeassertCS_d();
     MCR20Drv_CLK_SEL_Deassert();  //select 0 for 4MHz 
-    MCR20Drv_RST_B_Deassert();
+  //  MCR20Drv_RST_B_Deassert();
     RF_IRQ_Init();
     RF_IRQ_Disable();
     mPhyIrqDisableCnt = 1;
