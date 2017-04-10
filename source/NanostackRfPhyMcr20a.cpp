@@ -489,14 +489,14 @@ static void rf_init(void)
     mPwrState = gXcvrPwrIdle_c;
     /*Reset RF module*/
     #if !defined(TARGET_KW24D)
-      MCR20Drv_RESET();
+//      MCR20Drv_RESET();
     #endif
     /* Initialize the transceiver SPI driver */
     MCR20Drv_Init();
     /* Disable Tristate on MISO for SPI reads */
     MCR20Drv_IndirectAccessSPIWrite(MISC_PAD_CTRL, 0x02);
     /* Set XCVR clock output settings */
-    MCR20Drv_Set_CLK_OUT_Freq(gMCR20_ClkOutFreq_d);
+  //  MCR20Drv_Set_CLK_OUT_Freq(gMCR20_ClkOutFreq_d);
     /* Set default XCVR power state */
     rf_set_power_state(gXcvrRunState_d);
 
